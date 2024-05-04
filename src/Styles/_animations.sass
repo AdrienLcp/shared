@@ -1,0 +1,47 @@
+@keyframes slide-in-up
+  from
+    opacity: 0
+    transform: translateY(100%)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+@mixin slide-in-up
+  animation: slide-in-up var(--transition-200) var(--timing, ease-in-out)
+
+@keyframes fade-in
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+@mixin fade-in
+  animation: fade-in var(--transition-200) var(--timing, ease-in-out)
+
+@keyframes fade-out
+  from
+    opacity: 1
+  to
+    opacity: 0
+
+@mixin fade-out
+  animation: fade-out var(--transition-200) var(--timing, ease-in-out)
+
+@keyframes breath
+  0%, 100%
+    opacity: 1
+  50%
+    opacity: 0.5
+
+@mixin breath
+  animation: breath var(--transition-2000) var(--timing, ease-in-out) infinite
+
+@keyframes rotate-3d
+  from
+    transform: rotateY(-90deg)
+  to
+    transform: rotateY(270deg)
+
+@mixin rotate-3d
+  transform-style: preserve-3d
+  animation: rotate-3d var(--transition-3000) var(--timing, ease-in-out) infinite

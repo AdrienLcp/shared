@@ -1,0 +1,98 @@
+@function get-line-height($font-size: var(--font-size-m))
+  @return calc($font-size * var(--golden-ratio))
+  
+// --- BODY ---
+
+@mixin body-small
+  font-family: var(--font-base)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-xxxs, 12px)
+  line-height: get-line-height(var(--font-size-xxxs, 12px))
+  letter-spacing: var(--letter-spacing-100, 0.13px)
+
+@mixin body-medium
+  font-family: var(--font-base)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-xxs, 14px)
+  line-height: get-line-height(var(--font-size-xxs, 14px))
+
+@mixin body-large
+  font-family: var(--font-base)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-xs, 16px)
+  line-height: get-line-height(var(--font-size-xs, 16px))
+
+@mixin label-small
+  font-family: var(--font-base)
+  font-weight: var(--font-weight-medium, 500)
+  font-size: var(--font-size-xxxxs, 11px)
+  line-height: get-line-height(var(--font-size-xxxxs, 11px))
+  letter-spacing: var(--letter-spacing-200, 0.14px)
+
+@mixin label-medium
+  font-family: var(--font-base)
+  font-weight: var(--font-weight-medium, 500)
+  font-size: var(--font-size-xxxs, 12px)
+  line-height: get-line-height(var(--font-size-xxxs, 12px))
+
+@mixin label-large
+  font-family: var(--font-base)
+  font-weight: var(--font-weight-medium, 500)
+  font-size: var(--font-size-xxs, 14px)
+  line-height: get-line-height(var(--font-size-xxs, 14px))
+
+// --- HEADINGS ---
+
+@mixin title-small
+  font-family: var(--font-title)
+  font-weight: var(--font-weight-medium, 500)
+  font-size: var(--font-size-xxs, 14px)
+  line-height: get-line-height(var(--font-size-xxs, 14px))
+
+@mixin title-medium
+  font-family: var(--font-title)
+  font-weight: var(--font-weight-medium, 500)
+  font-size: var(--font-size-xs, 16px)
+  line-height: get-line-height(var(--font-size-xs, 16px))
+
+@mixin title-large
+  font-family: var(--font-title)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-s, 22px)
+  line-height: get-line-height(var(--font-size-s, 22px))
+
+@mixin headline-small
+  font-family: var(--font-title)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-m, 24px)
+  line-height: get-line-height(var(--font-size-m, 24px))
+
+@mixin headline-medium
+  font-family: var(--font-title)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-l, 28px)
+  line-height: get-line-height(var(--font-size-l, 28px))
+
+@mixin headline-large
+  font-family: var(--font-title)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-xl, 32px)
+  line-height: get-line-height(var(--font-size-xl, 32px))
+
+@mixin display-small
+  font-family: var(--font-title)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-xxl, 36px)
+  line-height: get-line-height(var(--font-size-xxl, 36px))
+
+@mixin display-medium
+  font-family: var(--font-title)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-xxxl, 45px)
+  line-height: get-line-height(var(--font-size-xxxl, 45px))
+
+@mixin display-large
+  font-family: var(--font-title)
+  font-weight: var(--font-weight-regular, 400)
+  font-size: var(--font-size-xxxxl, 57px)
+  line-height: get-line-height(var(--font-size-xxxxl, 57px))

@@ -1,0 +1,70 @@
+@import '@/Styles/reset.css'
+@import '@/Styles/vars.sass'
+@import '@/Styles/sizes.sass'
+@import '@/Styles/borders.sass'
+@import '@/Styles/colors.sass'
+@import '@/Styles/shadows.sass'
+@import '@/Styles/transitions.sass'
+@import '@/Styles/animations.sass'
+@import '@/Styles/mixins.sass'
+@import '@/Styles/typography.sass'
+
+*::-webkit-scrollbar
+  max-width: 0.5rem
+  max-height: 0.5rem
+
+  &-track
+    background-color: hsl(var(--neutral-background-secondary-rest))
+    border-radius: var(--radius-circular, 99px)
+
+  &-thumb
+    background-color: hsl(var(--brand-background-secondary-rest))
+    border-radius: var(--radius-circular, 99px)
+
+    &:hover
+      background-color: hsl(var(--brand-background-secondary-hover))
+
+    &:active
+      background-color: hsl(var(--brand-background-secondary-pressed))
+
+::selection
+  background-color: hsl(var(--brand-background-primary-rest))
+  color: hsl(var(--neutral-foreground-onbrand-rest))
+
+html
+  color-scheme: dark light
+  scroll-behavior: smooth
+  scroll-padding: var(--spacing-l)
+  accent-color: hsl(var(--brand-background-primary-rest))
+  caret-color: hsl(var(--brand-background-primary-rest))
+
+body
+  @include body-large
+  -webkit-tap-highlight-color: transparent
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  width: 100vw
+  min-height: 100svh
+  display: flex
+  flex-direction: column
+  background-color: hsl(var(--neutral-background-primary-rest))
+  color: hsl(var(--neutral-foreground-rest))
+  font-family: var(--font-base)
+  line-height: 1.6
+  letter-spacing: 0.025ch
+  overflow-x: hidden
+  transition-property: color, background-color
+  transition-duration: var(--transition-400)
+  transition-timing-function: var(--timing)
+
+main
+  display: flex
+  flex-direction: column
+  gap: var(--spacing-xxxxl)
+  flex: 1
+  margin-inline: auto
+  padding-block: clamp(2rem, 8vh, 10rem)
+  width: clamp(250px, 95vw, 1000px)
+
+h1, h2, h3, h4, h5, h6
+  font-family: var(--font-title)
