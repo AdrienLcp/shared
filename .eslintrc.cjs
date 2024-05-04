@@ -11,6 +11,14 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
-    semi: ['error', 'never']
+    semi: ['error', 'never'],
+    quotes: [
+      "error",
+      "single",
+      {
+        avoidEscape: true,
+        allowTemplateLiterals: true
+      }
+    ]
   }
 }
