@@ -1,11 +1,7 @@
 export type SortType = 'asc' | 'desc' | 'none'
 
-const getSortedValues = <T> (a: T, b: T, sortDirection: SortType): [T, T] => {
-  return sortDirection === 'asc' ? [a, b] : [b, a]
-}
-
-const getSortedByTypes = <T> (a: T, b: T, sortDirection: SortType): number => {
-  const [valueA, valueB] = getSortedValues(a, b, sortDirection)
+const getSortedValues = <T> (a: T, b: T, sortDirection: Omit<SortType, 'none'>): number => {
+  const [valueA, valueB] = sortDirection === 'asc' ? [a, b] : [b, a]
 
   if (typeof valueA === 'number' && typeof valueB === 'number') {
     return valueA - valueB
@@ -22,13 +18,13 @@ const getSortedByTypes = <T> (a: T, b: T, sortDirection: SortType): number => {
   return String(valueA).localeCompare(String(valueB))
 }
 
-export const getSortedObjectsArray = <T> (array: T[], sortKey: keyof T, sortDirection: SortType = 'asc'): T[] => {
+export const getSortedObjectsByKey = <T> (array: T[], sortKey: keyof T, sortDirection: SortType = 'asc'): T[] => {
   if (sortDirection === 'none') {
     return array
   }
 
   return array.toSorted((a, b) => {
-    return getSortedByTypes(a[sortKey], b[sortKey], sortDirection)
+    return getSortedValues(a[sortKey], b[sortKey], sortDirection)
   })
 }
 
@@ -38,6 +34,6 @@ export const getSortedArray = <T> (array: T[], sortDirection: SortType = 'asc'):
   }
 
   return array.toSorted((a, b) => {
-    return getSortedByTypes(a, b, sortDirection)
+    return getSortedValues(a, b, sortDirection)
   })
 }

@@ -19,9 +19,14 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "#ff3d00",
-  "cSpell.ignorePaths": [
-    "app/I18n/Dictionaries/**.json",
-    "app/Config/**.ts",
-    "app/manifest.ts"
-  ]
+  "cSpell.overrides": [
+    {
+      "filename": "src/I18n/Dictionaries/en.json",
+      "language": "en"
+    },
+    {
+      "filename": "src/I18n/Dictionaries/fr.json",
+      "language": "en,fr"
+    }
+  ],
 }
