@@ -5,8 +5,8 @@ import React from 'react'
 import Polyglot from './polyglot.js'
 
 import { useProvidedContext } from '@/Helpers/contexts'
-import { getStoredItem, storeItem } from '@/Helpers/local-storage'
 import type { DotNestedKeys } from '@/Helpers/strings'
+import { useLocalStorage } from '@/Storage'
 
 import frStrings from '@/I18n/Dictionaries/fr.json'
 import enStrings from '@/I18n/Dictionaries/en.json'
@@ -52,42 +52,31 @@ const isLocale = (locale: string): locale is Locale => {
 const I18nContext = React.createContext<I18nContextValue | null>(null)
 
 export const I18nProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [currentLocale, setCurrentLocale] = React.useState<Locale>(DEFAULT_LOCALE)
+  const [currentLocale, setCurrentLocale] = useLocalStorage('locale', DEFAULT_LOCALE, isLocale)
 
-  const currentDictionary = localesMap[currentLocale].dictionary
+  const currentDictionary = localesMap[currentLocale]?.dictionary
 
   const currentPolyglot = new Polyglot({
     phrases: currentDictionary as unknown as Record<string, string>
   })
 
   const changeLocale = (newLocale: Locale) => {
-    if (!LOCALES.includes(newLocale)) {
-      return
+    if (isLocale(newLocale)) {
+      setCurrentLocale(newLocale)
     }
-
-    setCurrentLocale(newLocale)
-    storeItem('locale', newLocale)
   }
 
   React.useEffect(() => {
-    const storedLocale = getStoredItem('locale')
-
-    if (storedLocale !== undefined) {
-      setCurrentLocale(storedLocale)
-      return
-    }
-
     const navigatorLanguage = navigator.language.slice(0, 2).toUpperCase()
 
     if (isLocale(navigatorLanguage)) {
       setCurrentLocale(navigatorLanguage)
     }
-  }, [])
+  }, [setCurrentLocale])
 
-  const i18n = (
-    key: I18NStringPaths,
-    options?: Record<string, unknown>
-  ) => currentPolyglot.t(key, options)
+  const i18n = (key: I18NStringPaths, options?: Record<string, unknown>) => {
+    return currentPolyglot.t(key, options)
+  }
 
   return (
     <I18nContext.Provider value={{ currentLocale, i18n, changeLocale }}>

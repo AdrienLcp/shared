@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useProvidedContext } from '@/Helpers/contexts'
-import { getStoredItem, storeItem } from '@/Helpers/local-storage'
+import { useLocalStorage } from '@/Storage'
 
 export const THEMES = ['System', 'Light', 'Dark'] as const
 export type Theme = typeof THEMES[number]
@@ -18,7 +18,7 @@ const ThemeContext = React.createContext<ThemeContextValue | null>(null)
 
 export const ThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [isDarkModeActive, setIsDarkModeActive] = React.useState<boolean>(true)
-  const [currentTheme, setCurrentTheme] = React.useState<Theme>('System')
+  const [currentTheme, setCurrentTheme] = useLocalStorage('theme', 'System')
 
   const changeTheme = (theme: Theme) => {
     if (!THEMES.includes(theme)) {
@@ -26,7 +26,6 @@ export const ThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) =
     }
 
     setCurrentTheme(theme)
-    storeItem('theme', theme)
 
     if (theme === 'System') {
       const matcher = window.matchMedia(PREFERS_DARK_COLOR_SCHEME)
@@ -57,14 +56,6 @@ export const ThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) =
       matcher.removeEventListener('change', handlePrefersColorSchemeChange)
     }
   }, [currentTheme])
-
-  React.useEffect(() => {
-    const storedTheme = getStoredItem('theme')
-
-    if (storedTheme) {
-      changeTheme(storedTheme)
-    } 
-  }, [])
 
   return (
     <ThemeContext.Provider value={{ isDarkModeActive, currentTheme, changeTheme }}>
